@@ -1,0 +1,24 @@
+html,
+body,
+#__next {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow-y: "overlay";
+  direction: rtl;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex-grow: 1;
+}
+
+.formik-error {
+  color: red;
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+}
