@@ -2,7 +2,7 @@ import * as React from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -12,11 +12,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
@@ -51,10 +51,6 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({}));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -74,7 +70,9 @@ const Drawer = styled(MuiDrawer, {
 
 export const Header = () => {
   const { palette } = useTheme();
+  const { push } = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [page, setPage] = React.useState<string | undefined>("/");
 
   const handleDrawerClose = () => {
     setOpen(!open);
@@ -110,9 +108,14 @@ export const Header = () => {
           }}
         >
           {[
-            { item: "لیست", icon: <FormatListBulletedIcon /> },
-            { item: "تاریخ", icon: <CalendarMonthIcon /> },
-            { item: "افزودن", icon: <AddCircleOutlineRoundedIcon /> },
+            { item: "خانه", icon: <HomeRoundedIcon />, route: "/" },
+            { item: "لیست", icon: <FormatListBulletedIcon />, route: "/lists" },
+            { item: "تاریخ", icon: <CalendarMonthIcon />, route: "/calender" },
+            {
+              item: "افزودن",
+              icon: <AddCircleOutlineRoundedIcon />,
+              route: "/add",
+            },
           ].map((text, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton
@@ -120,7 +123,16 @@ export const Header = () => {
                   minHeight: 60,
                   width: "100%",
                   textAlign: "start",
-                  color: palette.neutral.min,
+                  color: page === text.route ? "#160FCA" : palette.neutral.min,
+                  bgcolor: page === text.route ? palette.neutral.min : "",
+                  "&:hover": {
+                    bgcolor:
+                      page === text.route ? palette.neutral.min : "#160FAA",
+                  },
+                }}
+                onClick={() => {
+                  setPage(text.route);
+                  push(text.route);
                 }}
               >
                 <ListItemText
@@ -130,7 +142,8 @@ export const Header = () => {
                 <ListItemIcon
                   sx={{
                     justifyContent: open ? "end" : "",
-                    color: palette.neutral.min,
+                    color:
+                      page === text.route ? "#160FCA" : palette.neutral.min,
                   }}
                 >
                   {text.icon}

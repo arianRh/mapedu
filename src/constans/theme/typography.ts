@@ -23,7 +23,7 @@ declare module "@mui/material/Typography" {
 
 export const typography: TypographyOptions = {
   fontFamily:
-    "DMSans,Arial,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
+    "b koodak,Arial,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
   h1: {
     fontWeight: 500,
     fontSize: "2.5rem",
