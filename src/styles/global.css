@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "b koodak";
+  src: url("../fonts/BKoodakBold.eot?#") format("eot"),
+    /* IE6–8 */ url("../fonts/BKoodakBold.woff") format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("../fonts/BKoodakBold.ttf")
+      format("truetype"); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
 html,
 body,
 #__next {
@@ -6,6 +14,7 @@ body,
   height: 100%;
   overflow-y: "overlay";
   direction: rtl;
+  font-family: "b koodak", Arial, Helvetica, sans-serif;
 }
 
 #__next {
@@ -19,6 +28,20 @@ main {
 .formik-error {
   color: red;
   font-size: 15px;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
+}
+
+.rmdp-container {
+  width: 100%;
+}
+
+.custom-scrollbars__content {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbars__content::-webkit-scrollbar {
+  display: none;
 }

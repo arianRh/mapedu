@@ -66,7 +66,7 @@ export const lightPalette: PaletteOptions = {
     "300": "#BA68C8",
     "200": "#CE93D8",
     "100": "#E1BEE7",
-    "50": "#F3E5F5",
+    "50": "#f0f0fe",
   },
   neutral: {
     "900": "#000000",
@@ -81,18 +81,19 @@ export const lightPalette: PaletteOptions = {
     "50": "#F5F5F5",
     min: "#FFFFFF",
   },
+
   success: {
-    light: "#E5F8E6",
+    light: "#e7feea",
     main: "#32CC4C",
     dark: "#00B214",
   },
   warning: {
-    light: "#FEF4E3",
+    light: "#fdf8ea",
     main: "#EDAC41",
     dark: "#F7922E",
   },
   error: {
-    light: "#FBE3E8",
+    light: "#fbeef6",
     main: "#D7284B",
     dark: "#B31F46",
   },
