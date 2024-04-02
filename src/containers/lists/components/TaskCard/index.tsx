@@ -14,7 +14,6 @@ import TurnedInRoundedIcon from "@mui/icons-material/TurnedInRounded";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SchoolIcon from "@mui/icons-material/School";
 import { useState } from "react";
-import moment from "jalali-moment";
 import useTasksStore from "@/zustandStorage/tasks";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -64,7 +63,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
       sx={{
         borderRadius: 4,
         border: `1px solid ${palette.neutral[300]}`,
-        p: 4,
+        p: { md: 4, xs: 2 },
         display: "flex",
         justifyContent: "space-between",
       }}
@@ -81,7 +80,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
             borderRadius: 2,
             minWidth: "100px",
             height: "100px",
-            display: "flex",
+            display: { md: "flex", xs: "none" },
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -103,7 +102,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
         <Box sx={{ width: "100%" }}>
           <Box
             sx={{
-              display: "flex",
+              display: { md: "flex" },
               justifyContent: "space-between",
               width: "100%",
             }}
@@ -130,13 +129,21 @@ export const TaskCard = ({ item }: ItemProps | any) => {
                 }}
               />
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                my: { xs: 1, md: 0 },
+                position: "relative",
+              }}
+            >
               <Box
                 sx={{
                   ml: 1,
                   bgcolor: palette.primary[50],
                   px: 2,
                   borderRadius: 8,
+                  zIndex: 1,
                 }}
               >
                 <Typography variant="button">
@@ -144,9 +151,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
                 </Typography>
               </Box>
               <Typography variant="button" sx={{ ml: 1 }}>
-                {moment(new Date(item.date), "YYYY/MM/DD")
-                  .locale("fa")
-                  .format("YYYY/MM/DD")}
+                {item.date}
               </Typography>
               <IconButton
                 id="basic-button"
@@ -154,7 +159,11 @@ export const TaskCard = ({ item }: ItemProps | any) => {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
-                sx={{ p: "4px !important" }}
+                sx={{
+                  p: "4px !important",
+                  left: 0,
+                  position: { xs: "absolute", md: "relative" },
+                }}
               >
                 <MoreVertRoundedIcon />
               </IconButton>

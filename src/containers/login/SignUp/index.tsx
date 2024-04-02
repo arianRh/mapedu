@@ -37,7 +37,7 @@ export default function SignUp({ setHaveAccount }: SignUpProps) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 400,
+        width: { md: 400, xs: 300 },
         bgcolor: "background.paper",
         boxShadow: 24,
         py: 2,
@@ -46,6 +46,7 @@ export default function SignUp({ setHaveAccount }: SignUpProps) {
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 2,
+        px: 5,
       }}
     >
       <Box
@@ -90,6 +91,7 @@ export default function SignUp({ setHaveAccount }: SignUpProps) {
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "100%",
             }}
           >
             <Box sx={{ position: "relative" }}>
@@ -102,6 +104,7 @@ export default function SignUp({ setHaveAccount }: SignUpProps) {
                 sx={{
                   bgcolor: palette.neutral[100],
                   mb: 3,
+                  width: "100%",
                 }}
               />
 
@@ -122,6 +125,7 @@ export default function SignUp({ setHaveAccount }: SignUpProps) {
                   bgcolor: palette.neutral[100],
                   mt: 0.8,
                   mb: 3,
+                  width: "100%",
                 }}
               />
               <ErrorMessage

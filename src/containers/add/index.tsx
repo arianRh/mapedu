@@ -29,6 +29,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import SchoolIcon from "@mui/icons-material/School";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+import moment from "jalali-moment";
 
 interface EditProps {
   title: string;
@@ -48,7 +50,9 @@ export const Add = () => {
   const tasks = useTasksStore((state: any) => state.tasks);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<any>(new Date());
+  const [date, setDate] = useState<any>(
+    router.query.add ? router.query.add : new Date()
+  );
   const [priority, setPriority] = useState<string>("");
   const [condition, setCondition] = useState<string>("");
   const [type, setType] = useState<string>("");
@@ -158,7 +162,11 @@ export const Add = () => {
         condition: values.condition,
         type: values.type,
         priority: priority,
-        date: date,
+        date: router.query.add
+          ? date
+          : moment(new Date(date), "YYYY/MM/DD")
+              .locale("fa")
+              .format("YYYY/MM/DD"),
         id: edit.id,
       });
     } else {
@@ -168,7 +176,11 @@ export const Add = () => {
         condition: values.condition,
         type: values.type,
         priority: priority,
-        date: date,
+        date: router.query.add
+          ? date
+          : moment(new Date(date), "YYYY/MM/DD")
+              .locale("fa")
+              .format("YYYY/MM/DD"),
         id: crypto.randomUUID(),
       });
     }
@@ -183,12 +195,14 @@ export const Add = () => {
         justifyContent="center"
         alignItems="center"
         minHeight="78vh"
+        sx={{ pb: 10, mt: { xs: 3, md: 0 } }}
       >
         <Box
           sx={{
-            p: 5,
-            boxShadow:
-              " 0 4px 15px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.02)",
+            p: { xs: 0, md: 5 },
+            boxShadow: {
+              md: " 0 4px 15px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.02)",
+            },
             borderRadius: 4,
             display: "flex",
             flexDirection: "column",
@@ -206,7 +220,7 @@ export const Add = () => {
               borderRadius: "100%",
               width: "60px",
               height: "60px",
-              display: "flex",
+              display: { md: "flex", xs: "none" },
               alignItems: "center",
               justifyContent: "center",
               mt: -4,
@@ -220,7 +234,7 @@ export const Add = () => {
               }}
             />
           </Box>
-          <Grid container sx={{}}>
+          <Grid container>
             <Formik
               enableReinitialize
               initialValues={{
@@ -291,8 +305,10 @@ export const Add = () => {
                     />
                   </Grid>
                   <Grid container sx={{ display: "flex" }}>
-                    <Grid item md={6} sx={{ pl: 2 }}>
+                    <Grid item md={6} xs={12} sx={{ pl: { md: 2 } }}>
                       <DatePicker
+                        editable={false}
+                        className="rmdp-mobile"
                         value={date}
                         minDate={new Date()}
                         onChange={setDate}
@@ -311,7 +327,7 @@ export const Add = () => {
                         }
                       />
                     </Grid>
-                    <Grid item md={6}>
+                    <Grid item md={6} xs={12} sx={{ mt: { xs: 2, md: 0 } }}>
                       <Box
                         sx={{
                           display: "flex",
@@ -371,9 +387,10 @@ export const Add = () => {
                     <Grid
                       item
                       md={6}
+                      xs={12}
                       sx={{
                         justifyContent: "space-between",
-                        pl: 2,
+                        pl: { md: 2 },
                       }}
                     >
                       <FormControl fullWidth>
@@ -402,7 +419,7 @@ export const Add = () => {
                         className="formik-error"
                       />
                     </Grid>
-                    <Grid item md={6}>
+                    <Grid item md={6} xs={12} sx={{ mt: { md: 0, xs: 2 } }}>
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">
                           نوع
