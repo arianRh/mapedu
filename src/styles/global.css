@@ -28,7 +28,6 @@ main {
 .formik-error {
   color: red;
   font-size: 15px;
-  /* position: absolute; */
   bottom: 0;
 }
 

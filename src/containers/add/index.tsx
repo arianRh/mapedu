@@ -3,15 +3,11 @@ import {
   Button,
   FormControl,
   Grid,
-  IconButton,
-  InputAdornment,
   InputLabel,
-  Menu,
   MenuItem,
   OutlinedInput,
   Select,
   SelectChangeEvent,
-  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -20,7 +16,7 @@ import PlaylistAddRoundedIcon from "@mui/icons-material/PlaylistAddRounded";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import useTasksStore from "../../zustandStorage/tasks";
 import * as Yup from "yup";
-import DatePicker, { Calendar, DateObject } from "react-multi-date-picker";
+import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useEffect, useState } from "react";
@@ -45,12 +41,12 @@ interface EditProps {
 export const Add = () => {
   const { palette } = useTheme();
   const router = useRouter();
-  const addTask = useTasksStore((state: any) => state.addTask);
-  const updateTask = useTasksStore((state: any) => state.inc);
-  const tasks = useTasksStore((state: any) => state.tasks);
+  const addTask = useTasksStore((state) => state.addTask);
+  const updateTask = useTasksStore((state) => state.inc);
+  const tasks = useTasksStore((state) => state.tasks);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<any>(
+  const [date, setDate] = useState<string | Date | any>(
     router.query.add ? router.query.add : new Date()
   );
   const [priority, setPriority] = useState<string>("");

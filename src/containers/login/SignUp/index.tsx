@@ -1,19 +1,14 @@
 import {
   Box,
   Button,
-  Modal,
   OutlinedInput,
   Typography,
   useTheme,
 } from "@mui/material";
 import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import useAccountStore from "../../../zustandStorage/accounts";
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface SignUpProps {
@@ -22,8 +17,8 @@ interface SignUpProps {
 
 export default function SignUp({ setHaveAccount }: SignUpProps) {
   const { palette } = useTheme();
-  const addAccount = useAccountStore((state: any) => state.addaccount);
-  const accounts = useAccountStore((state: any) => state.accounts);
+  const addAccount = useAccountStore((state) => state.addaccount);
+  const accounts = useAccountStore((state) => state.accounts);
 
   const SignupSchema = Yup.object().shape({
     password: Yup.string().min(8, "حدال 8 کاراکتر").required("اجباری"),

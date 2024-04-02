@@ -1,8 +1,7 @@
 import { Modal } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import useAccountStore from "@/zustandStorage/accounts";
 
 interface AccountProps {
   email: string;

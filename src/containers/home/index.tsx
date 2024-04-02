@@ -5,15 +5,12 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/layouts/mobile.css";
-import { useState } from "react";
 import { useRouter } from "next/router";
 
 function Home() {
   const { palette } = useTheme();
-  const tasks = useTasksStore((state: any) => state.tasks);
+  const tasks = useTasksStore((state) => state.tasks);
   const { push } = useRouter();
-
-  console.log();
 
   const cards = [
     {
@@ -28,7 +25,7 @@ function Home() {
       ),
     },
     {
-      title: "تسک های انجام شده",
+      title: "وظیفه های انجام شده",
       content: (
         <Typography
           variant="h3"
