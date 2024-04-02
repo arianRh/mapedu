@@ -8,6 +8,7 @@ import {
   OutlinedInput,
   Select,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -27,7 +28,8 @@ interface ItemProps {
 }
 
 export const Lists = () => {
-  const { palette } = useTheme();
+  const { palette, breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down("md"));
   const tasks = useTasksStore((state: any) => state.tasks);
   const [serachQuery, serSearchQuery] = useState<string>("");
   const [priority, serPriority] = useState<string>("");
@@ -86,7 +88,7 @@ export const Lists = () => {
           mt: 3,
           alignItems: "start",
         }}
-        columnSpacing={3}
+        columnSpacing={isMobile ? 0 : 3}
       >
         <Grid item md={6} xs={12}>
           <Formik
@@ -121,7 +123,11 @@ export const Lists = () => {
             )}
           </Formik>
         </Grid>
-        <Grid md={2} sx={{ display: "flex", justifyContent: "end" }}>
+        <Grid
+          md={2}
+          xs={12}
+          sx={{ display: "flex", justifyContent: "end", mt: { md: 0, xs: 3 } }}
+        >
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">الویت</InputLabel>
             <Select
@@ -158,7 +164,7 @@ export const Lists = () => {
           display: "flex",
           flexDirection: "column",
           gap: "24px",
-          overflowY: "overlay",
+          overflowY: { md: "overlay" },
         }}
         // className="custom-scrollbars__content"
       >
@@ -184,7 +190,7 @@ export const Lists = () => {
         ) : (
           tasks.map((item: object, index: number) => {
             return (
-              <Box key={index}>
+              <Box key={index} sx={{ pb: index + 1 === tasks.length ? 10 : 0 }}>
                 <TaskCard item={item} />
               </Box>
             );

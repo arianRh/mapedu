@@ -110,7 +110,6 @@ export const Header = () => {
           {[
             { item: "خانه", icon: <HomeRoundedIcon />, route: "/" },
             { item: "لیست", icon: <FormatListBulletedIcon />, route: "/lists" },
-            { item: "تاریخ", icon: <CalendarMonthIcon />, route: "/calender" },
             {
               item: "افزودن",
               icon: <AddCircleOutlineRoundedIcon />,

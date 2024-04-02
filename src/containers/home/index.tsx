@@ -1,26 +1,90 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import TurnedInRoundedIcon from "@mui/icons-material/TurnedInRounded";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import useTasksStore from "@/zustandStorage/tasks";
-import moment from "jalali-moment";
 import { TaskCard } from "./TaskCard";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 function Home() {
   const { palette } = useTheme();
   const tasks = useTasksStore((state: any) => state.tasks);
+  const { push } = useRouter();
+
+  console.log();
 
   const cards = [
-    { title: "مجموع ساعات" },
-    { title: "تسک های انجام شده" },
-    { title: "اضافه کنید" },
+    {
+      title: "مجموع وظیفه ها",
+      content: (
+        <Typography
+          variant="h3"
+          sx={{ mt: 2, alignSelf: "end", color: palette.success.main }}
+        >
+          {tasks.length} وظیفه
+        </Typography>
+      ),
+    },
+    {
+      title: "تسک های انجام شده",
+      content: (
+        <Typography
+          variant="h3"
+          sx={{ mt: 2, alignSelf: "end", color: palette.warning.main }}
+        >
+          {tasks.filter((item: any) => item.condition === "done").length} وظیفه
+        </Typography>
+      ),
+    },
+    {
+      title: "اضافه کنید",
+      content: (
+        <DatePicker
+          editable={false}
+          className="rmdp-mobile"
+          minDate={new Date()}
+          onChange={(event) => {
+            push({
+              query: {
+                add: String(event),
+              },
+              pathname: "add",
+            });
+          }}
+          calendar={persian}
+          locale={persian_fa}
+          calendarPosition="bottom-right"
+          render={
+            <IconButton
+              sx={{
+                borderRadius: "8px",
+                bgcolor: palette.primary.main,
+                "&:hover": { bgcolor: palette.primary.main },
+                color: palette.neutral.min,
+                width: "100%",
+                mt: 2,
+              }}
+            >
+              <Typography variant="button">انتخاب تاریخ</Typography>
+            </IconButton>
+          }
+        />
+      ),
+    },
   ];
-
-  // let time = 135;
-  // var Hours = Math.floor(time / 60);
-  // var minutes = time % 60;
 
   return (
     <Box sx={{ height: "100%" }}>
-      <Box sx={{ width: "100%", display: { md: "flex" }, gap: 2 }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          gap: 2,
+          flexDirection: { md: "row", xs: "column" },
+        }}
+      >
         {cards.map((item, index) => {
           return (
             <Box
@@ -32,9 +96,12 @@ function Home() {
                 py: 2,
                 px: { md: 4, xs: 2 },
                 height: { md: 100 },
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <Typography>{item.title}</Typography>
+              {item.content}
             </Box>
           );
         })}
@@ -57,12 +124,13 @@ function Home() {
             width: { md: "100%" },
             borderRadius: 6,
             px: 2,
-            py: 3,
+            py: { md: 3, xs: 2 },
             overflow: "overlay",
             display: "flex",
             flexDirection: "column",
             gap: 2,
             border: `1px solid ${palette.neutral[200]}`,
+            height: { md: "auto", xs: "450px" },
           }}
           className="custom-scrollbars__content"
         >
@@ -84,12 +152,13 @@ function Home() {
             width: { md: "100%" },
             borderRadius: 6,
             px: 2,
-            py: 3,
+            py: { md: 3, xs: 2 },
             overflow: "overlay",
             display: "flex",
             flexDirection: "column",
             gap: 2,
             border: `1px solid ${palette.neutral[200]}`,
+            height: { md: "auto", xs: "450px" },
           }}
           className="custom-scrollbars__content"
         >
@@ -114,12 +183,13 @@ function Home() {
             width: { md: "100%" },
             borderRadius: 6,
             px: 2,
-            py: 3,
+            py: { md: 3, xs: 2 },
             overflow: "overlay",
             display: "flex",
             flexDirection: "column",
             gap: 2,
             border: `1px solid ${palette.neutral[200]}`,
+            height: { md: "auto", xs: "450px" },
           }}
           className="custom-scrollbars__content"
         >
@@ -141,12 +211,13 @@ function Home() {
             width: { md: "100%" },
             borderRadius: 6,
             px: 2,
-            py: 3,
+            py: { md: 3, xs: 2 },
             overflow: "overlay",
             display: "flex",
             flexDirection: "column",
             gap: 2,
             border: `1px solid ${palette.neutral[200]}`,
+            height: { md: "auto", xs: "450px" },
           }}
           className="custom-scrollbars__content"
         >

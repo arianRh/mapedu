@@ -121,9 +121,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
         {item.description}
       </Typography>
       <Typography variant="button" sx={{ color: palette.neutral[400] }}>
-        {moment(new Date(item.date), "YYYY/MM/DD")
-          .locale("fa")
-          .format("YYYY/MM/DD")}
+        {item.date}
       </Typography>
     </Box>
   );
