@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   Grid,
   InputLabel,
@@ -18,23 +17,14 @@ import useTasksStore from "@/zustandStorage/tasks";
 import { useState } from "react";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
-interface ItemProps {
-  title: string;
-  description: string;
-  date: string;
-  priority: string;
-  type: string;
-  id: string;
-}
-
 export const Lists = () => {
   const { palette, breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down("md"));
-  const tasks = useTasksStore((state: any) => state.tasks);
+  const tasks = useTasksStore((state) => state.tasks);
   const [serachQuery, serSearchQuery] = useState<string>("");
   const [priority, serPriority] = useState<string>("");
 
-  const filtered = tasks.filter((entry: any) =>
+  const filtered = tasks.filter((entry) =>
     Object.values(entry).some(
       (val) =>
         typeof val === "string" &&
@@ -113,6 +103,7 @@ export const Lists = () => {
                   sx={{
                     width: "100%",
                   }}
+                  disabled={priority ? true : false}
                 />
                 <ErrorMessage
                   name="title"
@@ -138,6 +129,7 @@ export const Lists = () => {
               onChange={(event) => {
                 serPriority(event.target.value);
               }}
+              disabled={serachQuery ? true : false}
             >
               {priorityCase.map((item, index) => (
                 <MenuItem

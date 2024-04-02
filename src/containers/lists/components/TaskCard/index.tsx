@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   IconButton,
   Menu,
   MenuItem,
@@ -31,7 +30,7 @@ export const TaskCard = ({ item }: ItemProps | any) => {
   const { palette } = useTheme();
   const { push } = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const removeTodo = useTasksStore((state: any) => state.removeTodo);
+  const removeTodo = useTasksStore((state) => state.removeTodo);
   const open = Boolean(anchorEl);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

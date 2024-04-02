@@ -1,17 +1,13 @@
 import {
   Box,
   Button,
-  Modal,
   OutlinedInput,
   Typography,
   useTheme,
 } from "@mui/material";
 import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
 import { useState } from "react";
 import useAccountStore from "@/zustandStorage/accounts";
 
@@ -22,7 +18,7 @@ interface SignInProps {
 export default function SignIn({ setHaveAccount }: SignInProps) {
   const { palette } = useTheme();
   const [email, setEmail] = useState<string>("");
-  const accounts = useAccountStore((state: any) => state.accounts);
+  const accounts = useAccountStore((state) => state.accounts);
 
   const SignupSchema = Yup.object().shape({
     password: Yup.string().min(8, "حدال 8 کاراکتر").required("اجباری"),

@@ -2,7 +2,6 @@ import * as React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { useRouter } from "next/router";
